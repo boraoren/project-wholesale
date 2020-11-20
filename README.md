@@ -28,13 +28,17 @@ run `./gradlew clean build`
 
 ## Run Application
 1. run `./gradlew bootRun`
-2. to get account list open link 
+2. to get __account list__ open link 
 `http://localhost:8080/api/v1/accounts`
+3. to get __transaction list__ of account number `585309209` 
+`http://localhost:8080/api/v1/accounts/585309209/transactions`
+
+for detail you can check [api documentation](#generate-and-view-api-documentation)
 
 ## Run Test
 `./gradlew test`
 
-## Generate API documentation
+## Generate and View API documentation
 1. run `./gradlew clean asciidoctor`
 2. check `build/asciidoc/html5` folder for index.html 
 and open ot

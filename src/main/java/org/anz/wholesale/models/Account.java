@@ -3,6 +3,7 @@ package org.anz.wholesale.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Account {
 
     @Id
@@ -34,8 +36,6 @@ public class Account {
 
     @Column(name = "OPENING_AVAILABLE_BALANCE")
     private double openingAvailableBalance;
-
-    public Account(){}
 
     public Account(Long number){
         this.number = number;

@@ -29,3 +29,27 @@ include::{snippets}/get-accounts/response-body.adoc[]
 
 ==== Http Response Fields
 include::{snippets}/get-accounts/response-fields.adoc[]
+
+== Transactions
+=== GET
+==== Request with Curl
+include::{snippets}/get-transactions/curl-request.adoc[]
+
+==== Request with HttPie
+One showing how to make a request using HTTPie:
+include::{snippets}/get-transactions/httpie-request.adoc[]
+
+==== Http Request
+One showing the HTTP request:
+include::{snippets}/get-transactions/http-request.adoc[]
+
+==== Http Response
+One showing the HTTP response:
+include::{snippets}/get-transactions/http-response.adoc[]
+
+==== Http Response Body
+And one showing the response body:
+include::{snippets}/get-transactions/response-body.adoc[]
+
+==== Http Response Fields
+include::{snippets}/get-transactions/response-fields.adoc[]

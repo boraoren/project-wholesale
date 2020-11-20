@@ -1,6 +1,9 @@
 package org.anz.wholesale.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +11,9 @@ import java.util.Date;
 @Entity
 @Table(name = "TRANSACTION")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transaction {
 
     @Id
@@ -17,10 +23,10 @@ public class Transaction {
     private Date valueDate;
 
     @Column(name = "DEBIT_AMOUNT")
-    private double debitAmount;
+    private Double debitAmount;
 
     @Column(name = "CREDIT_AMOUNT")
-    private double creditAmount;
+    private Double creditAmount;
 
     @Column(name = "DEBIT_CREDIT")
     @Enumerated(EnumType.STRING)
