@@ -13,7 +13,7 @@ paths:
     get:
       description: get account list with details
       responses:
-        '200':
+        200:
           description: A list of accounts
           content:
             application/json:
@@ -21,6 +21,27 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Account'
+
+  /accounts/{accountNumber}/transactions:
+    get:
+      description: get account transactions
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: integer
+            format: int64
+            example: 585309209
+      responses:
+        200:
+          description: A list of account's transactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+
 
 components:
   schemas:
@@ -54,3 +75,39 @@ components:
               type: number
               format: decimal
               example: 84327.51
+
+    Transaction:
+      allOf:
+        - $ref: '#/components/schemas/BaseAccount'
+        - type: object
+          properties:
+            number:
+              type: integer
+              format: int64
+              example: 123-2223-212
+            valueDate:
+              type: string
+              format: date
+              example: Jan. 12, 2012
+            debitAmound:
+              type: number
+              format: decimal
+              example:
+            creditAmount:
+              type: number
+              format: decimal
+              example: 9540.98
+            debitCredit:
+              type: string
+              enum: [ Debit, Credit ]
+              example: Credit
+            narrative:
+              type: string
+              example: ''
+
+
+
+
+
+
+
