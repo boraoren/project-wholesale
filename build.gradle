@@ -39,7 +39,8 @@ dependencies {
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE'
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.4.RELEASE'
 
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
 }
 
 test {
