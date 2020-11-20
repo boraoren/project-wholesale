@@ -1,0 +1,31 @@
+= ANZ WHOLESALE
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+== Accounts
+=== GET
+==== Request with Curl
+include::{snippets}/get-accounts/curl-request.adoc[]
+
+==== Request with HttPie
+One showing how to make a request using HTTPie:
+include::{snippets}/get-accounts/httpie-request.adoc[]
+
+==== Http Request
+One showing the HTTP request:
+include::{snippets}/get-accounts/http-request.adoc[]
+
+==== Http Response
+One showing the HTTP response:
+include::{snippets}/get-accounts/http-response.adoc[]
+
+==== Http Response Body
+And one showing the response body:
+include::{snippets}/get-accounts/response-body.adoc[]
+
+==== Http Response Fields
+include::{snippets}/get-accounts/response-fields.adoc[]

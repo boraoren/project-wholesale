@@ -1,14 +1,17 @@
 package org.anz.wholesale.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "TRANSACTION")
+@Data
 public class Transaction {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @Column(name = "VALUE_DATE")
     private Date valueDate;
@@ -30,59 +33,4 @@ public class Transaction {
     @JoinColumn(name = "ACCOUNT_NUMBER")
     private Account account;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Date getValueDate() {
-        return valueDate;
-    }
-
-    public void setValueDate(Date valueDate) {
-        this.valueDate = valueDate;
-    }
-
-    public double getDebitAmount() {
-        return debitAmount;
-    }
-
-    public void setDebitAmount(double debitAmount) {
-        this.debitAmount = debitAmount;
-    }
-
-    public double getCreditAmount() {
-        return creditAmount;
-    }
-
-    public void setCreditAmount(double creditAmount) {
-        this.creditAmount = creditAmount;
-    }
-
-    public DebitCredit getDebitCredit() {
-        return debitCredit;
-    }
-
-    public void setDebitCredit(DebitCredit debitCredit) {
-        this.debitCredit = debitCredit;
-    }
-
-    public String getNarrative() {
-        return narrative;
-    }
-
-    public void setNarrative(String narrative) {
-        this.narrative = narrative;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 }
