@@ -51,5 +51,10 @@ import `anz-wholesale.postman_collection.json` file to postman
 
 ![postman](documents/postman.png)
 
+
+## Issues
+you can check issues for github [here](https://github.com/boraoren/project-wholesale/issues?q=)
+
+![github issues](documents/github-issues.png)
  
 
