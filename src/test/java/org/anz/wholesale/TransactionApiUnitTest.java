@@ -23,7 +23,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -64,12 +63,12 @@ public class TransactionApiUnitTest {
 
         //given
         Long accountNumber = 123456789L;
-        Optional<Account> expectedAccount = getExpectedAccount(accountNumber);
+        Account expectedAccount = getExpectedAccount(accountNumber);
 
-        given(accountRepository.findById(accountNumber))
+        given(accountRepository.findBy(accountNumber))
                 .willReturn(expectedAccount);
 
-        given(transactionRepository.findAllByAccount(expectedAccount.orElse(null)))
+        given(transactionRepository.findAllByAccount(expectedAccount))
                 .willReturn(getExpectedTransactionList(accountNumber));
 
         //when
@@ -83,21 +82,21 @@ public class TransactionApiUnitTest {
 
     }
 
-    private Optional<Account> getExpectedAccount(Long accountNumber) {
-        return Optional.of(Account.builder()
+    private Account getExpectedAccount(Long accountNumber) {
+        return Account.builder()
                 .number(accountNumber)
                 .balanceDate(LocalDate.parse("08/11/2018", DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .currency(Currency.SGD)
                 .name("SGSavings726")
                 .openingAvailableBalance(84327.51)
-                .type(AccountType.Savings).build());
+                .type(AccountType.Savings).build();
 
     }
 
     private List<Transaction> getExpectedTransactionList(Long accountNumber) {
 
         DateTimeFormatter accountDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter transactionDateFormatter = DateTimeFormatter.ofPattern("MMM. dd, yyyy");
+        DateTimeFormatter transactionDateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
         Account account = Account.builder()
                 .balanceDate(LocalDate.parse("08/11/2018", accountDateFormatter))
