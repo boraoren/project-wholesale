@@ -1,10 +1,12 @@
 package org.anz.wholesale.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.anz.wholesale.util.MoneyJsonSerializer;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,6 +31,7 @@ public class Transaction {
     private Double debitAmount;
 
     @Column(name = "CREDIT_AMOUNT")
+    @JsonSerialize(using = MoneyJsonSerializer.class)
     private Double creditAmount;
 
     @Column(name = "DEBIT_CREDIT")
