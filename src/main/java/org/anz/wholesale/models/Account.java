@@ -1,5 +1,6 @@
 package org.anz.wholesale.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,8 @@ public class Account {
     private AccountType type;
 
     @Column(name = "BALANCE_DATE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "dd/MM/yyyy")
     private Date balanceDate;
 
     @Column(name = "CURRENCY")
@@ -37,7 +40,7 @@ public class Account {
     @Column(name = "OPENING_AVAILABLE_BALANCE")
     private double openingAvailableBalance;
 
-    public Account(Long number){
+    public Account(Long number) {
         this.number = number;
     }
 
