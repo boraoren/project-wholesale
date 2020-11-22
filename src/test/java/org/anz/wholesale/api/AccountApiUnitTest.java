@@ -1,6 +1,5 @@
-package org.anz.wholesale;
+package org.anz.wholesale.api;
 
-import org.anz.wholesale.api.AccountApi;
 import org.anz.wholesale.models.Account;
 import org.anz.wholesale.models.AccountType;
 import org.anz.wholesale.models.Currency;

@@ -1,4 +1,4 @@
-package org.anz.wholesale;
+package org.anz.wholesale.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +20,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @Sql({"/test-data.sql"})
-public class TransactionApiIntegrationTest {
+public class AccountApiIntegrationTest {
 
     @Autowired
     public MockMvc mockMvc;
 
     @Test
-    public void getTransactionsByAccountNumber_v1_shouldHttpStatusBe200AndReturnAccountRelatedTransactionList() throws Exception {
-        //given
-        Long accountNumber = 123456789L;
-
+    public void get_v1_shouldHttpStatusBe200AndReturnAccountList() throws Exception {
         //when
         ResultActions resultActions = this
                 .mockMvc
-                .perform(get("/api/v1/accounts/{accountNumber}/transactions", accountNumber))
+                .perform(get("/api/v1/accounts"))
                 .andDo(print());
 
         //then
@@ -41,17 +38,11 @@ public class TransactionApiIntegrationTest {
                 .andExpect(status().isOk());
 
         resultActions
-                .andExpect(jsonPath("$", hasSize(12)))
-                .andExpect(jsonPath("$.[0].account.number")
+                .andExpect(jsonPath("$", hasSize(3)))
+                .andExpect(jsonPath("$.[0].number")
                         .value("123456789"))
-                .andExpect(jsonPath("$.[0].valueDate")
-                        .value("Jan. 12, 2012"))
-                .andExpect(jsonPath("$.[0].account.currency")
-                        .value("SGD"))
-                .andExpect(jsonPath("$.[0].creditAmount")
-                        .value("9,540.98"))
-                .andExpect(jsonPath("$.[0].debitCredit")
-                        .value("Credit"));
+                .andExpect(jsonPath("$.[0].name")
+                        .value("SGSavings726"));
 
     }
 

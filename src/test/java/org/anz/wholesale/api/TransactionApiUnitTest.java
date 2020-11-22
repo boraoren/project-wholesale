@@ -1,6 +1,5 @@
-package org.anz.wholesale;
+package org.anz.wholesale.api;
 
-import org.anz.wholesale.api.TransactionApi;
 import org.anz.wholesale.models.*;
 import org.anz.wholesale.repository.AccountRepository;
 import org.anz.wholesale.repository.TransactionRepository;
@@ -10,10 +9,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -36,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TransactionApi.class)
 @AutoConfigureRestDocs
+@ComponentScan("org.anz.wholesale.util")
 @ExtendWith({RestDocumentationExtension.class})
 public class TransactionApiUnitTest {
 
@@ -173,21 +175,9 @@ public class TransactionApiUnitTest {
                         .attributes(key("constraints")
                         .value("Must not be null. Must not be empty")),
 
-                fieldWithPath("account.type").description("Type of the account (Savings, Current etc.)")
-                        .attributes(key("constraints")
-                        .value("Must not be null. Must not be empty")),
-
-                fieldWithPath("account.balanceDate").description("Balance Date of the account")
-                        .attributes(key("constraints")
-                        .value("Must not be null. Must not be empty")),
-
                 fieldWithPath("account.currency").description("Currency of the account (SGD, AUD etc.)")
                         .attributes(key("constraints")
                         .value("Must not be null. Must not be empty")),
-
-                fieldWithPath("account.openingAvailableBalance").description("Opening available balance of the account")
-                        .attributes(key("constraints")
-                        .value("Must not be null. Must not be empty"))
 
         };
     }

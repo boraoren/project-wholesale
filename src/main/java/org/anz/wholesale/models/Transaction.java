@@ -23,15 +23,12 @@ public class Transaction {
     private Long id;
 
     @Column(name = "VALUE_DATE")
-    @JsonFormat(shape = JsonFormat.Shape.STRING,
-            pattern = "MMM dd, yyyy")
     private LocalDate valueDate;
 
     @Column(name = "DEBIT_AMOUNT")
     private Double debitAmount;
 
     @Column(name = "CREDIT_AMOUNT")
-    @JsonSerialize(using = MoneyJsonSerializer.class)
     private Double creditAmount;
 
     @Column(name = "DEBIT_CREDIT")
