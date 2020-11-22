@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.anz.wholesale.util.MoneyJsonSerializer;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -33,7 +33,7 @@ public class Account {
     @Column(name = "BALANCE_DATE")
     @JsonFormat(shape = JsonFormat.Shape.STRING,
             pattern = "dd/MM/yyyy")
-    private Date balanceDate;
+    private LocalDate balanceDate;
 
     @Column(name = "CURRENCY")
     @Enumerated(EnumType.STRING)
