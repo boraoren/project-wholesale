@@ -44,7 +44,7 @@ for detail you can check [api documentation](#generate-and-view-api-documentatio
 ## Generate and View API documentation
 1. run `./gradlew clean asciidoctor`
 2. check `build/asciidoc/html5` folder for index.html 
-and open ot
+and open it with web browser
 
 ## Use Postman
 import `anz-wholesale.postman_collection.json` file to postman
