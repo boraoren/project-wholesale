@@ -3,7 +3,6 @@ package org.anz.wholesale.api;
 import org.anz.wholesale.models.Account;
 import org.anz.wholesale.models.mappers.AccountMapper;
 import org.anz.wholesale.models.responses.AccountResponse;
-import org.anz.wholesale.models.responses.TransactionResponse;
 import org.anz.wholesale.repository.AccountRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

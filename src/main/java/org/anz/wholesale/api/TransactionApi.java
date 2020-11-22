@@ -4,7 +4,6 @@ import org.anz.wholesale.models.BaseAccount;
 import org.anz.wholesale.models.Transaction;
 import org.anz.wholesale.models.mappers.TransactionMapper;
 import org.anz.wholesale.models.responses.TransactionResponse;
-import org.anz.wholesale.repository.AccountRepository;
 import org.anz.wholesale.repository.BaseAccountRepository;
 import org.anz.wholesale.repository.TransactionRepository;
 import org.springframework.http.ResponseEntity;
