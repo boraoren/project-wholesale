@@ -9,6 +9,10 @@ transactions on any of the accounts they hold.
 - [view account list](http://localhost:8080/accounts)
 - [view account transactions](http://localhost:8080/api/v1/accounts/585309209/transactions)
 
+please check open [api documentation](anz-wholesale-api.yaml)
+![open api documentation](documents/anz-open-api.png)
+
+
 # Getting Started
 
 ## Prerequisites
@@ -44,6 +48,8 @@ and open ot
 
 ## Use Postman
 import `anz-wholesale.postman_collection.json` file to postman
+
+![postman](documents/postman.png)
 
  
 
