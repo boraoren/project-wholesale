@@ -1,5 +1,6 @@
 package org.anz.wholesale.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,8 @@ public class Transaction {
     private Long id;
 
     @Column(name = "VALUE_DATE")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,
+            pattern = "MMM dd, yyyy")
     private Date valueDate;
 
     @Column(name = "DEBIT_AMOUNT")
