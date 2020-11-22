@@ -1,12 +1,10 @@
 package org.anz.wholesale.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.anz.wholesale.util.MoneyJsonSerializer;
+import org.anz.wholesale.models.enums.DebitCredit;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -39,7 +37,7 @@ public class Transaction {
     private String narrative;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ACCOUNT_NUMBER")
-    private Account account;
+    @JoinColumn(name = "BASE_ACCOUNT_NUMBER")
+    private BaseAccount baseAccount;
 
 }

@@ -1,12 +1,12 @@
 package org.anz.wholesale.api;
 
-import org.anz.wholesale.models.Account;
+import org.anz.wholesale.models.BaseAccount;
 import org.anz.wholesale.models.Transaction;
-import org.anz.wholesale.models.TransactionResponse;
+import org.anz.wholesale.models.mappers.TransactionMapper;
+import org.anz.wholesale.models.responses.TransactionResponse;
 import org.anz.wholesale.repository.AccountRepository;
+import org.anz.wholesale.repository.BaseAccountRepository;
 import org.anz.wholesale.repository.TransactionRepository;
-import org.anz.wholesale.util.TransactionMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,15 +20,15 @@ import java.util.List;
 @RequestMapping("/api")
 public class TransactionApi {
 
-    private final AccountRepository accountRepository;
+    private final BaseAccountRepository baseAccountRepository;
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
 
     public TransactionApi(TransactionRepository transactionRepository,
-                          AccountRepository accountRepository,
+                          BaseAccountRepository baseAccountRepository,
                           TransactionMapper transactionMapper) {
         this.transactionRepository = transactionRepository;
-        this.accountRepository = accountRepository;
+        this.baseAccountRepository = baseAccountRepository;
         this.transactionMapper = transactionMapper;
     }
 
@@ -37,9 +37,9 @@ public class TransactionApi {
                                                                 Long accountNumber) {
 
         try {
-            Account account = accountRepository.findBy(accountNumber);
+            BaseAccount baseAccount = baseAccountRepository.findBy(accountNumber);
             List<Transaction> transactions = transactionRepository
-                    .findAllByAccount(account);
+                    .findAllByBaseAccount(baseAccount);
 
             if (transactions.size() > 0) {
                 List<TransactionResponse> transactionResponseList = transactionMapper

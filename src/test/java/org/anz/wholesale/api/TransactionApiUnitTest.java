@@ -1,7 +1,10 @@
 package org.anz.wholesale.api;
 
-import org.anz.wholesale.models.*;
-import org.anz.wholesale.repository.AccountRepository;
+import org.anz.wholesale.models.BaseAccount;
+import org.anz.wholesale.models.Transaction;
+import org.anz.wholesale.models.enums.Currency;
+import org.anz.wholesale.models.enums.DebitCredit;
+import org.anz.wholesale.repository.BaseAccountRepository;
 import org.anz.wholesale.repository.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +17,6 @@ import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.payload.ResponseFieldsSnippet;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -37,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TransactionApi.class)
 @AutoConfigureRestDocs
-@ComponentScan("org.anz.wholesale.util")
+@ComponentScan("org.anz.wholesale.models.mappers")
 @ExtendWith({RestDocumentationExtension.class})
 public class TransactionApiUnitTest {
 
@@ -47,7 +49,7 @@ public class TransactionApiUnitTest {
     private TransactionRepository transactionRepository;
 
     @MockBean
-    private AccountRepository accountRepository;
+    private BaseAccountRepository baseAccountRepository;
 
     @BeforeEach
     public void setUp(WebApplicationContext webApplicationContext,
@@ -64,13 +66,13 @@ public class TransactionApiUnitTest {
     public void getTransactionsByAccountNumber_v1_shouldHttpStatusBe200AndReturnAccountRelatedTransactionList() throws Exception {
 
         //given
-        Long accountNumber = 123456789L;
-        Account expectedAccount = getExpectedAccount(accountNumber);
+        Long accountNumber = 585309209L;
+        BaseAccount expectedBaseAccount = getExpectedBaseAccount(accountNumber);
 
-        given(accountRepository.findBy(accountNumber))
-                .willReturn(expectedAccount);
+        given(baseAccountRepository.findBy(accountNumber))
+                .willReturn(expectedBaseAccount);
 
-        given(transactionRepository.findAllByAccount(expectedAccount))
+        given(transactionRepository.findAllByBaseAccount(expectedBaseAccount))
                 .willReturn(getExpectedTransactionList(accountNumber));
 
         //when
@@ -84,43 +86,39 @@ public class TransactionApiUnitTest {
 
     }
 
-    private Account getExpectedAccount(Long accountNumber) {
-        return Account.builder()
+    private BaseAccount getExpectedBaseAccount(Long accountNumber) {
+
+        return BaseAccount.builder()
                 .number(accountNumber)
-                .balanceDate(LocalDate.parse("08/11/2018", DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-                .currency(Currency.SGD)
                 .name("SGSavings726")
-                .openingAvailableBalance(84327.51)
-                .type(AccountType.Savings).build();
+                .currency(Currency.SGD)
+                .build();
 
     }
 
     private List<Transaction> getExpectedTransactionList(Long accountNumber) {
 
-        DateTimeFormatter accountDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter transactionDateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
-        Account account = Account.builder()
-                .balanceDate(LocalDate.parse("08/11/2018", accountDateFormatter))
-                .currency(Currency.SGD)
-                .name("SGSavings726")
+        BaseAccount baseAccount = BaseAccount.builder()
                 .number(accountNumber)
-                .openingAvailableBalance(84327.51)
-                .type(AccountType.Savings).build();
+                .name("SGSavings726")
+                .currency(Currency.SGD)
+                .build();
 
         Transaction transaction100 = Transaction.builder()
                 .id(100L)
                 .valueDate(LocalDate.parse("Jan. 12, 2012", transactionDateFormatter))
                 .creditAmount(9540.98)
                 .debitCredit(DebitCredit.Credit)
-                .account(account).build();
+                .baseAccount(baseAccount).build();
 
         Transaction transaction200 = Transaction.builder()
                 .id(200L)
                 .valueDate(LocalDate.parse("Jan. 12, 2012", transactionDateFormatter))
                 .creditAmount(7497.82)
                 .debitCredit(DebitCredit.Credit)
-                .account(account).build();
+                .baseAccount(baseAccount).build();
 
         return new ArrayList<Transaction>() {{
             add(transaction100);

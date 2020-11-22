@@ -30,7 +30,7 @@ public class TransactionApiIntegrationTest {
     @Test
     public void getTransactionsByAccountNumber_v1_shouldHttpStatusBe200AndReturnAccountRelatedTransactionList() throws Exception {
         //given
-        Long accountNumber = 123456789L;
+        Long accountNumber = 585309209L;
 
         //when
         ResultActions resultActions = this
@@ -45,7 +45,7 @@ public class TransactionApiIntegrationTest {
         resultActions
                 .andExpect(jsonPath("$", hasSize(12)))
                 .andExpect(jsonPath("$.[0].account.number")
-                        .value("123456789"))
+                        .value("585309209"))
                 .andExpect(jsonPath("$.[0].valueDate")
                         .value("Jan. 12, 2012"))
                 .andExpect(jsonPath("$.[0].account.currency")

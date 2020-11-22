@@ -40,7 +40,7 @@ public class AccountApiIntegrationTest {
         resultActions
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[0].number")
-                        .value("123456789"))
+                        .value("585309209"))
                 .andExpect(jsonPath("$.[0].name")
                         .value("SGSavings726"));
 

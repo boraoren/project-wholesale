@@ -1,8 +1,9 @@
 package org.anz.wholesale.api;
 
 import org.anz.wholesale.models.Account;
-import org.anz.wholesale.models.AccountType;
-import org.anz.wholesale.models.Currency;
+import org.anz.wholesale.models.BaseAccount;
+import org.anz.wholesale.models.enums.AccountType;
+import org.anz.wholesale.models.enums.Currency;
 import org.anz.wholesale.repository.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.FieldDescriptor;
@@ -36,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(AccountApi.class)
 @AutoConfigureRestDocs
+@ComponentScan("org.anz.wholesale.models.mappers")
 @ExtendWith({RestDocumentationExtension.class})
 public class AccountApiUnitTest {
 
@@ -117,19 +120,27 @@ public class AccountApiUnitTest {
         DateTimeFormatter
                 formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        Account account585309209 = Account.builder()
-                .balanceDate(LocalDate.parse("08/11/2018", formatter))
-                .currency(Currency.SGD)
-                .name("SGSavings726")
+        BaseAccount baseAccount585309209 = BaseAccount
+                .builder()
                 .number(123456789L)
+                .name("SGSavings726")
+                .currency(Currency.SGD).build();
+
+        Account account585309209 = Account.builder()
+                .baseAccount(baseAccount585309209)
+                .balanceDate(LocalDate.parse("08/11/2018", formatter))
                 .openingAvailableBalance(84327.51)
                 .type(AccountType.Savings).build();
 
-        Account account791066619L = Account.builder()
-                .balanceDate(LocalDate.parse("08/11/2018", formatter))
-                .currency(Currency.AUD)
-                .name("AUSavings933")
+        BaseAccount baseAccount234567891 = BaseAccount
+                .builder()
                 .number(234567891L)
+                .name("AUSavings933")
+                .currency(Currency.SGD).build();
+
+        Account account791066619L = Account.builder()
+                .baseAccount(baseAccount234567891)
+                .balanceDate(LocalDate.parse("08/11/2018", formatter))
                 .openingAvailableBalance(88005.93)
                 .type(AccountType.Savings).build();
 

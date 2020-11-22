@@ -1,10 +1,11 @@
-package org.anz.wholesale.models;
+package org.anz.wholesale.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Data;
+import org.anz.wholesale.models.enums.DebitCredit;
 import org.anz.wholesale.util.MoneyJsonSerializer;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class TransactionResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING,
             pattern = "MMM dd, yyyy")
     private LocalDate valueDate;
+
     private Double debitAmount;
 
     @JsonSerialize(using = MoneyJsonSerializer.class)
@@ -27,6 +29,6 @@ public class TransactionResponse {
     private String narrative;
 
     @JsonProperty("account")
-    private AccountResponse accountResponse;
+    private BaseAccountResponse baseAccountResponse;
 
 }
