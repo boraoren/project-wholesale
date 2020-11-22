@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import org.anz.wholesale.util.MoneyJsonSerializer;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "TRANSACTION")
@@ -25,7 +25,7 @@ public class Transaction {
     @Column(name = "VALUE_DATE")
     @JsonFormat(shape = JsonFormat.Shape.STRING,
             pattern = "MMM dd, yyyy")
-    private Date valueDate;
+    private LocalDate valueDate;
 
     @Column(name = "DEBIT_AMOUNT")
     private Double debitAmount;
