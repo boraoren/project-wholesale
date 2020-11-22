@@ -19,8 +19,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,7 +86,7 @@ public class TransactionApiUnitTest {
     private Optional<Account> getExpectedAccount(Long accountNumber) {
         return Optional.of(Account.builder()
                 .number(accountNumber)
-                .balanceDate(new Date())
+                .balanceDate(LocalDate.parse("08/11/2018", DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 .currency(Currency.SGD)
                 .name("SGSavings726")
                 .openingAvailableBalance(84327.51)
@@ -94,8 +95,12 @@ public class TransactionApiUnitTest {
     }
 
     private List<Transaction> getExpectedTransactionList(Long accountNumber) {
+
+        DateTimeFormatter accountDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter transactionDateFormatter = DateTimeFormatter.ofPattern("MMM. dd, yyyy");
+
         Account account = Account.builder()
-                .balanceDate(new Date())
+                .balanceDate(LocalDate.parse("08/11/2018", accountDateFormatter))
                 .currency(Currency.SGD)
                 .name("SGSavings726")
                 .number(accountNumber)
@@ -104,14 +109,14 @@ public class TransactionApiUnitTest {
 
         Transaction transaction100 = Transaction.builder()
                 .id(100L)
-                .valueDate(new Date())
+                .valueDate(LocalDate.parse("Jan. 12, 2012", transactionDateFormatter))
                 .creditAmount(9540.98)
                 .debitCredit(DebitCredit.Credit)
                 .account(account).build();
 
         Transaction transaction200 = Transaction.builder()
                 .id(200L)
-                .valueDate(new Date())
+                .valueDate(LocalDate.parse("Jan. 12, 2012", transactionDateFormatter))
                 .creditAmount(7497.82)
                 .debitCredit(DebitCredit.Credit)
                 .account(account).build();

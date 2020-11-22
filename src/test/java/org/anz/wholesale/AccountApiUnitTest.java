@@ -20,8 +20,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
@@ -56,13 +57,16 @@ public class AccountApiUnitTest {
     }
 
     @Test
-    public void get_v1_shouldHttpStatusBe200AndReturnAccountList() throws Exception {
+    public void get_v1_shouldHttpStatusBe200AndReturnAccountList()
+            throws Exception {
+
         //given
         given(accountRepository.findAll())
                 .willReturn(getExpectedAccountList());
 
         //when
-        ResultActions getResultActions = mockMvc.perform(get("/api/v1/accounts"))
+        ResultActions getResultActions = mockMvc
+                .perform(get("/api/v1/accounts"))
                 .andDo(document("get-accounts",
                         getResponseFieldsSnippet()));
 
@@ -111,19 +115,22 @@ public class AccountApiUnitTest {
 
     private List<Account> getExpectedAccountList() {
 
+        DateTimeFormatter
+                formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         Account account585309209 = Account.builder()
-                .balanceDate(new Date())
+                .balanceDate(LocalDate.parse("08/11/2018", formatter))
                 .currency(Currency.SGD)
                 .name("SGSavings726")
-                .number(585309209L)
+                .number(123456789L)
                 .openingAvailableBalance(84327.51)
                 .type(AccountType.Savings).build();
 
         Account account791066619L = Account.builder()
-                .balanceDate(new Date())
+                .balanceDate(LocalDate.parse("08/11/2018", formatter))
                 .currency(Currency.AUD)
                 .name("AUSavings933")
-                .number(791066619L)
+                .number(234567891L)
                 .openingAvailableBalance(88005.93)
                 .type(AccountType.Savings).build();
 
