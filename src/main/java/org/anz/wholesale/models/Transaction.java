@@ -24,7 +24,7 @@ public class Transaction {
 
     @Column(name = "VALUE_DATE")
     @JsonFormat(shape = JsonFormat.Shape.STRING,
-            pattern = "MMM dd, yyyy")
+            pattern = "MMM. dd, yyyy")
     private LocalDate valueDate;
 
     @Column(name = "DEBIT_AMOUNT")
