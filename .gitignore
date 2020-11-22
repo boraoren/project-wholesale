@@ -5,3 +5,6 @@
 .gradle
 /build/
 !gradle-wrapper.jar
+
+### Mac ###
+.DS_Store

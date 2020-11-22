@@ -6,8 +6,8 @@ transactions on any of the accounts they hold.
 
 ## Required functionality
 
-- view account list
-- view account transactions
+- [view account list](http://localhost:8080/accounts)
+- [view account transactions](http://localhost:8080/api/v1/accounts/585309209/transactions)
 
 # Getting Started
 
@@ -16,7 +16,6 @@ transactions on any of the accounts they hold.
 1. java
     1. install sdkman `https://sdkman.io/install`
     1. install java `sdk install java`
-
 
 ## Installation
 1. Clone the repo
@@ -42,6 +41,9 @@ for detail you can check [api documentation](#generate-and-view-api-documentatio
 1. run `./gradlew clean asciidoctor`
 2. check `build/asciidoc/html5` folder for index.html 
 and open ot
+
+## Use Postman
+import `anz-wholesale.postman_collection.json` file to postman
 
  
 
