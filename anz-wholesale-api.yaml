@@ -20,7 +20,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Account'
+                  $ref: '#/components/schemas/AccountResponse'
 
   /accounts/{accountNumber}/transactions:
     get:
@@ -40,12 +40,12 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Transaction'
+                  $ref: '#/components/schemas/TransactionResponse'
 
 
 components:
   schemas:
-    BaseAccount:
+    BaseAccountResponse:
       type: object
       properties:
         number:
@@ -59,9 +59,9 @@ components:
           type: string
           enum: [SGD, AUD]
 
-    Account:
+    AccountResponse:
       allOf:
-        - $ref: '#/components/schemas/BaseAccount'
+        - $ref: '#/components/schemas/BaseAccountResponse'
         - type: object
           properties:
             type:
@@ -76,12 +76,12 @@ components:
               format: decimal
               example: 84327.51
 
-    Transaction:
+    TransactionResponse:
       allOf:
-        - $ref: '#/components/schemas/BaseAccount'
+        - $ref: '#/components/schemas/BaseAccountResponse'
         - type: object
           properties:
-            number:
+            id:
               type: integer
               format: int64
               example: 123-2223-212
